@@ -14,7 +14,7 @@ class LandingController extends Controller
      */
     public function index()
     {
-        
+        return view('pages.landing.index');
     }
 
     /**
@@ -81,5 +81,22 @@ class LandingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // custome
+    public function explore(){
+        return view('pages.landing.explore');
+    }
+
+    public function detail($id){
+        return view('pages.landing.detail');
+    }
+
+    public function booking($id){
+
+    }
+
+    public function detail_booking($id){
+    
     }
 }

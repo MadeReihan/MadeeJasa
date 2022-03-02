@@ -82,4 +82,11 @@ class RequestController extends Controller
     {
         //
     }
+
+    // custome
+
+    public function approve($id)
+    {
+        //
+    }
 }
