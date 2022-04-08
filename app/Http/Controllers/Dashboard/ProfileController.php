@@ -98,14 +98,13 @@ class ProfileController extends Controller
         $data_detail_user = $request_detail_user->all();
 
         // get photo user
-        $get_photo = DetailUser::where('users_id',Auth::user()->id)->first();
+        $get_photo = DetailUser::where('users_id', Auth::user()->id)->first();
 
         // delete old file from storage
         if(isset($data_detail_user['photo'])){
             $data = 'storage/'.$get_photo['photo'];
-            if(File::exist($data)){
+            if(File::exists($data)){
                 File::delete($data);
-
             }else{
                 File::delete('storage/app/public/'.$get_photo['photo']);
             }
@@ -113,30 +112,33 @@ class ProfileController extends Controller
 
         // store file to storage
         if(isset($data_detail_user['photo'])){
-            $data_detail_user['photo'] = $request_detail_user->file('photo')->store('assets/photo','public');
+            $data_detail_user['photo'] = $request_detail_user->file('photo')->store(
+                'assets/photo', 'public'
+            );
         }
-
 
         // proses save to user
         $user = User::find(Auth::user()->id);
         $user->update($data_profile);
 
-        // proses save to detail user
+        // ptoses save to detail user
         $detail_user = DetailUser::find($user->detail_user->id);
         $detail_user->update($data_detail_user);
 
-
-        // process save to experience
-        $experience_user_id = ExperienceUser::where('detail_user_id',$detail_user['id'])->first();
+        // proses save to experience
+        $experience_user_id = ExperienceUser::where('detail_user_id', $detail_user['id'])->first();
         if(isset($experience_user_id)){
-            foreach($data_profile['experience'] as $key => $value ){
+
+            foreach ($data_profile['experience'] as $key => $value) {
                 $experience_user = ExperienceUser::find($key);
                 $experience_user->detail_user_id = $detail_user['id'];
                 $experience_user->experience = $value;
                 $experience_user->save();
             }
+
         }else{
-            foreach($data_profile['experience'] as $key => $value ){
+
+            foreach ($data_profile['experience'] as $key => $value) {
                 if(isset($value)){
                     $experience_user = new ExperienceUser;
                     $experience_user->detail_user_id = $detail_user['id'];
@@ -144,12 +146,11 @@ class ProfileController extends Controller
                     $experience_user->save();
                 }
             }
+
         }
 
-        toast()->success('Profile berhasil diperbarui');
-
+        toast()->success('Update has been success');
         return back();
-
     }
 
     /**

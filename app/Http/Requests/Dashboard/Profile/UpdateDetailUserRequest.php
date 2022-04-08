@@ -28,25 +28,17 @@ class UpdateDetailUserRequest extends FormRequest
     {
         return [
             'photo' => [
-                'nullable',
-                'file',
-                'max:1024',
+                'nullable', 'file', 'max:1024',
             ],
             'role' => [
-                'nullable',
-                'string',
-                'max:100',
+                'nullable', 'string', 'max:100',
             ],
-            'contat_number' => [
-                'required',
-                'number',
-                'max:12',
+            'contact_number' => [
+                'required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'max:12',
             ],
             'biography' => [
-                'nullable',
-                'string',
-                'max:5000',
-            ]
+                'nullable', 'string', 'max:5000',
+            ],
         ];
     }
 }

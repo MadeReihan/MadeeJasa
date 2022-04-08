@@ -29,33 +29,22 @@ class UpdateServiceRequest extends FormRequest
     {
         return [
             'title' => [
-                'required',
-                'string',
-                'max:255',
+                'required', 'string', 'max:255',
             ],
             'description' => [
-                'nullable',
-                'string',
-                'max:5000',
+                'nullable', 'string', 'max:5000',
             ],
             'delivery_time' => [
-                'required',
-                'integer',
-                'max:100',
+                'required', 'integer', 'max:100',
             ],
-            'revision_time' => [
-                'required',
-                'integer',
-                'max:100',
+            'revision_limit' => [
+                'required', 'integer', 'max:100',
             ],
             'price' => [
-                'required',
-                'string',
+                'required', 'string',
             ],
             'note' => [
-                'nullable',
-                'string',
-                'max:5000',
+                'nullable', 'string', 'max:5000',
             ],
         ];
     }

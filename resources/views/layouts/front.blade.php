@@ -16,7 +16,7 @@
 
         @include('includes.Landing.header')
 
-            {{-- @include('sweetalert::alert') --}}
+            @include('sweetalert::alert')
             @yield('content')
 
         @include('includes.Landing.footer')
